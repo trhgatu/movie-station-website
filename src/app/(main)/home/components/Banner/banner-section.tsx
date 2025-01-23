@@ -41,7 +41,7 @@ export function BannerSection() {
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div className="text-red-500 text-center">{error}</div>;
 
-    const firstRow = popularMovies.slice(0, popularMovies.length / 2);
+    const firstRow = upcomingMovies.slice(0, upcomingMovies.length / 2);
     const secondRow = popularMovies.slice(popularMovies.length / 2);
 
     return (
@@ -49,7 +49,6 @@ export function BannerSection() {
             <IntroSection />
             <div className="w-1/2 p-6">
                 <div className="relative flex h-[500px] w-full flex-row items-center justify-center overflow-hidden">
-                    {/* Marquee */}
                     <Marquee pauseOnHover vertical className="[--duration:20s]">
                         {firstRow.map((movie) => (
                             <div key={movie.id} className="p-2">
