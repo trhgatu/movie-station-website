@@ -1,7 +1,9 @@
+import { BannerSection } from "./components/Banner/banner-section";
+
 export function HomePage() {
     return (
-        <div>
-            <h1>Home</h1>
+        <div className="w-full">
+            <BannerSection/>
         </div>
     );
 }

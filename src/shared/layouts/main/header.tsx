@@ -1,15 +1,19 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { ModeToggle } from "@/shared/components/darkmode-toggle/darkmode-toggle";
 
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <header className="bg-gray-900 text-white sticky top-0 z-50 shadow-lg">
+        <header className="sticky top-0 z-50 bg-white dark:bg-black">
             <div className="container mx-auto flex items-center justify-between py-4 px-6">
                 <div className="text-2xl font-bold">
                     <a href="/" className="hover:text-red-500 transition-all">
                         MovieHub
                     </a>
+                </div>
+                <div>
+                    <ModeToggle/>
                 </div>
                 <nav className="hidden md:flex space-x-6">
                     <a href="/movies" className="hover:text-red-500 transition-all">

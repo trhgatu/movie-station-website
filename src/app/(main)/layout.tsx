@@ -1,6 +1,11 @@
 import { MainLayout } from '#shared/layouts';
 import { PropsWithChildren } from 'react';
+import { ThemeProvider } from '@/shared/layouts/main/theme-provider';
 
 export default function Layout({ children }: PropsWithChildren) {
-    return <MainLayout>{children}</MainLayout>;
+    return (
+        <ThemeProvider attribute="class">
+            <MainLayout>{children}</MainLayout>
+        </ThemeProvider>
+    )
 }
