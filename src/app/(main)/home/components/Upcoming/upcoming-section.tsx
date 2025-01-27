@@ -41,7 +41,7 @@ export function UpcomingSection() {
         {movies.map((movie) => (
           <div
             key={movie.id}
-            className="group cursor-pointer hover:scale-105 transition-all duration-200 hover:opacity-80"
+            className="group cursor-pointer hover:scale-105 transition-all duration-200 "
           >
             <div className="w-full">
               <Image
@@ -49,7 +49,7 @@ export function UpcomingSection() {
                 alt={movie.title}
                 width={500}
                 height={750}
-                className="w-full h-auto object-cover rounded-lg"
+                className="w-full h-auto object-cover hover:opacity-80 rounded-lg"
                 placeholder="blur"
                 blurDataURL="/placeholder.png"
               />

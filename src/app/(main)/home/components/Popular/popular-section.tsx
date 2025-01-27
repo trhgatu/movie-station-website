@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { getPopularListMovie } from "@/shared/api-services/tmdbApi";
+import { TrendingUp } from "lucide-react";
 type Movie = {
   id: number;
   title: string;
@@ -30,7 +31,10 @@ export function PopularSection() {
 
   return (
     <div className="w-full py-8 container mx-auto max-w-5xl">
-      <h2 className="text-2xl font-bold mb-4">Popular Movies</h2>
+      <div className="flex items-center mb-4">
+        <span className="text-2xl font-bold">Popular Movies</span>
+        <TrendingUp className="ml-2" />
+      </div>
       <div className="grid grid-cols-5 gap-4">
         {movies.map((movie) => (
           <div
