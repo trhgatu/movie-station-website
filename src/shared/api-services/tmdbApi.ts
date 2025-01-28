@@ -36,3 +36,7 @@ export async function getSimilarMovies(movieId: number, page: number = 1) {
 export async function getPopularListMovie(page: number = 1) {
     return await fetchTMDB(`movie/popular`, { language: 'en-US', page });
 }
+
+export async function getMovieDetail(id: string) {
+    return await fetchTMDB(`movie/${id}`, { language: 'en-US' });
+}

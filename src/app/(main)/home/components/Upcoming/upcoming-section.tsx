@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { getUpcomingListMovie } from "@/shared/api-services/tmdbApi";
 import { Box, Typography, CircularProgress } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { CircleFadingArrowUp } from "lucide-react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -17,6 +18,7 @@ type Movie = {
 };
 
 export function UpcomingSection() {
+  const router = useRouter();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -97,6 +99,7 @@ export function UpcomingSection() {
           {movies.map((movie) => (
             <SwiperSlide key={movie.id}>
               <Box
+                onClick={() => router.push(`/movies/${movie.id}`)}
                 className="hover:brightness-[60%] transition-all duration-200 cursor-pointer"
                 sx={{
                   borderRadius: 2,
