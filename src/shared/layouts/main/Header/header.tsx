@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ModeToggle } from "@/shared/components/darkmode-toggle/darkmode-toggle";
-
+import Link from 'next/link';
 
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,24 +11,24 @@ export function Header() {
         >
             <div className="container mx-auto flex items-center justify-between py-4 px-6">
                 <div className="text-2xl font-bold">
-                    <a href="/">MovieS</a>
+                    <Link href="/">MovieS</Link>
                 </div>
                 <div>
                     <ModeToggle />
                 </div>
                 <nav className="hidden md:flex space-x-6">
-                    <a href="/movies" className="hover:text-red-500 transition-all">
+                    <Link href="/movies" className="hover:text-red-500 transition-all">
                         Movies
-                    </a>
-                    <a href="/tv-shows" className="hover:text-red-500 transition-all">
+                    </Link>
+                    <Link href="/tv-shows" className="hover:text-red-500 transition-all">
                         TV Shows
-                    </a>
-                    <a href="/favorites" className="hover:text-red-500 transition-all">
+                    </Link>
+                    <Link href="/favorites" className="hover:text-red-500 transition-all">
                         Favorites
-                    </a>
-                    <a href="/profile" className="hover:text-red-500 transition-all">
+                    </Link>
+                    <Link href="/profile" className="hover:text-red-500 transition-all">
                         Profile
-                    </a>
+                    </Link>
                 </nav>
                 <button
                     className="md:hidden text-2xl focus:outline-none"
@@ -40,18 +40,18 @@ export function Header() {
             {isMenuOpen && (
                 <div className="md:hidden bg-gray-800">
                     <nav className="flex flex-col space-y-4 py-4 px-6">
-                        <a href="/movies" className="hover:text-red-500 transition-all">
+                        <Link href="/movies" className="hover:text-red-500 transition-all">
                             Movies
-                        </a>
-                        <a href="/tv-shows" className="hover:text-red-500 transition-all">
+                        </Link>
+                        <Link href="/tv-shows" className="hover:text-red-500 transition-all">
                             TV Shows
-                        </a>
-                        <a href="/favorites" className="hover:text-red-500 transition-all">
+                        </Link>
+                        <Link href="/favorites" className="hover:text-red-500 transition-all">
                             Favorites
-                        </a>
-                        <a href="/profile" className="hover:text-red-500 transition-all">
+                        </Link>
+                        <Link href="/profile" className="hover:text-red-500 transition-all">
                             Profile
-                        </a>
+                        </Link>
                     </nav>
                 </div>
             )}
