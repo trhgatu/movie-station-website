@@ -4,7 +4,7 @@ import { UpcomingSection } from "./components/Upcoming/upcoming-section";
 
 export function HomePage() {
     return (
-        <div className="w-full">
+        <div>
             <BannerSection/>
             <UpcomingSection/>
             <PopularSection/>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { Box, Typography, CircularProgress } from "@mui/material";
+import { Box, Typography, CircularProgress, Chip, Stack } from "@mui/material";
 import Image from "next/image";
 import { getMovieDetail } from "@/shared/api-services/tmdbApi";
 
@@ -21,9 +21,9 @@ export default function MovieDetailPage() {
                 } else {
                     console.error("Invalid ID");
                 }
-                setIsLoading(false);
             } catch (err: any) {
                 setError(err.message);
+            } finally {
                 setIsLoading(false);
             }
         }
@@ -51,23 +51,64 @@ export default function MovieDetailPage() {
     if (!movie) return null;
 
     return (
-        <Box sx={{ p: 4, maxWidth: "800px", mx: "auto" }}>
-            <Image
-                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                alt={movie.title}
-                width={500}
-                height={750}
-                style={{ borderRadius: 8, marginBottom: 16 }}
-            />
-            <Typography variant="h4" fontWeight="bold" mb={2}>
-                {movie.title}
-            </Typography>
-            <Typography variant="body1" mb={4}>
-                {movie.overview}
-            </Typography>
-            <Typography variant="subtitle1">
-                Genres: {movie.genres.map((genre: any) => genre.name).join(", ")}
-            </Typography>
+        <Box sx={{ p: 4, maxWidth: "900px", mx: "auto", display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 4 }}>
+            {/* Movie Poster */}
+            <Box>
+                <Image
+                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    alt={movie.title}
+                    width={350}
+                    height={500}
+                    style={{ borderRadius: 8 }}
+                />
+            </Box>
+
+            {/* Movie Details */}
+            <Box>
+                <Typography variant="h4" fontWeight="bold" mb={2}>
+                    {movie.title} <Typography component="span" variant="h6">({new Date(movie.release_date).getFullYear()})</Typography>
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary" mb={2}>
+                    Tagline: <i>{movie.tagline || "No tagline available"}</i>
+                </Typography>
+                <Typography variant="body1" mb={3}>
+                    {movie.overview}
+                </Typography>
+
+                <Stack direction="row" spacing={1} mb={3}>
+                    {movie.genres.map((genre: any) => (
+                        <Chip key={genre.id} label={genre.name} variant="outlined" />
+                    ))}
+                </Stack>
+
+                <Typography variant="body1" mb={1}>
+                    <strong>Runtime:</strong> {movie.runtime} minutes
+                </Typography>
+                <Typography variant="body1" mb={1}>
+                    <strong>Release Date:</strong> {new Date(movie.release_date).toLocaleDateString()}
+                </Typography>
+                <Typography variant="body1" mb={1}>
+                    <strong>Language:</strong> {movie.spoken_languages.map((lang: any) => lang.english_name).join(", ")}
+                </Typography>
+                <Typography variant="body1" mb={1}>
+                    <strong>Budget:</strong> ${movie.budget.toLocaleString()}
+                </Typography>
+                <Typography variant="body1" mb={1}>
+                    <strong>Revenue:</strong> ${movie.revenue.toLocaleString()}
+                </Typography>
+                <Typography variant="body1" mb={3}>
+                    <strong>Rating:</strong> {movie.vote_average} ({movie.vote_count} votes)
+                </Typography>
+
+                {/* Homepage link */}
+                {movie.homepage && (
+                    <Typography variant="body1" mb={1}>
+                        <a href={movie.homepage} target="_blank" rel="noopener noreferrer" style={{ color: "#1976d2" }}>
+                            Official Website
+                        </a>
+                    </Typography>
+                )}
+            </Box>
         </Box>
     );
 }

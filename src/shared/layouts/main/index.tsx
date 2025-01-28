@@ -1,12 +1,14 @@
 import { Footer } from './footer';
-import { Header } from './header';
+import { Header } from './Header/header';
 import { PropsWithChildren } from 'react';
 
 export function MainLayout({ children }: PropsWithChildren) {
     return (
         <>
             <Header />
-            {children}
+            <div className='mt-[var(--header-height)]'>
+                {children}
+            </div>
             <Footer />
         </>
     );
