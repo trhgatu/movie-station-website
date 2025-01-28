@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { getUpcomingListMovie } from "@/shared/api-services/tmdbApi";
 import { CircleFadingArrowUp } from "lucide-react";
 import Image from "next/image";
@@ -18,6 +18,7 @@ type Movie = {
 export function UpcomingSection() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const swiperRef = useRef<any>(null);
 
   useEffect(() => {
     async function fetchUpcomingMovies() {
@@ -30,6 +31,12 @@ export function UpcomingSection() {
     }
     fetchUpcomingMovies();
   }, []);
+
+  useEffect(() => {
+    if (swiperRef.current) {
+      swiperRef.current.navigation.update();
+    }
+  }, [movies]);
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -44,9 +51,9 @@ export function UpcomingSection() {
       <Swiper
         loop={true}
         modules={[Navigation]}
-        spaceBetween={16}
-        slidesPerView={2}
-        navigation
+        spaceBetween={20}
+        navigation={true}
+        className="mySwiper"
         breakpoints={{
           640: {
             slidesPerView: 2,
@@ -61,6 +68,7 @@ export function UpcomingSection() {
             slidesPerView: 6,
           },
         }}
+        onSwiper={(swiper) => (swiperRef.current = swiper)}
       >
         {movies.map((movie) => (
           <SwiperSlide key={movie.id}>
