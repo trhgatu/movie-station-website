@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import Link from 'next/link';
 import { getUpcomingListMovie } from "@/shared/api-services/tmdbApi";
 import { Box, Typography, CircularProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
@@ -98,27 +99,28 @@ export function UpcomingSection() {
         >
           {movies.map((movie) => (
             <SwiperSlide key={movie.id}>
-              <Box
-                onClick={() => router.push(`/movies/${movie.id}`)}
-                className="hover:brightness-[60%] transition-all duration-200 cursor-pointer"
-                sx={{
-                  borderRadius: 2,
-                  overflow: "hidden",
-                }}
-              >
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                  alt={movie.title}
-                  width={500}
-                  height={750}
-                  loading="lazy"
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                    objectFit: "cover",
+              <Link href={`/movies/${movie.id}`} passHref>
+                <Box
+                  className="hover:brightness-[60%] transition-all duration-200 cursor-pointer"
+                  sx={{
+                    borderRadius: 2,
+                    overflow: "hidden",
                   }}
-                />
-              </Box>
+                >
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    alt={movie.title}
+                    width={500}
+                    height={750}
+                    loading="lazy"
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      objectFit: "cover",
+                    }}
+                  />
+                </Box>
+              </Link>
               <Typography
                 textAlign="center"
                 mt={1}

@@ -3,15 +3,12 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { getUpcomingListMovie } from "@/shared/api-services/tmdbApi";
 import { Button } from "@/shared/components/ui/button";
+import { Box } from "@mui/material";
 import "swiper/css";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/shared/components/ui/carousel";
+import "swiper/css/navigation";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import { motion } from "framer-motion";
 
 interface Movie {
   id: number;
@@ -65,71 +62,80 @@ export function BannerSection() {
   if (isLoading) return <div className="text-center">Loading...</div>;
 
   return (
-    <section className="container mx-auto py-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <Carousel opts={{ loop: true }}>
-            <CarouselContent>
-              {movies.map((movie) => (
-                <AnimatePresence key={movie.id}>
-                  <CarouselItem>
+    <Box sx={{ py: 4, px: 2, maxWidth: "1200px", mx: "auto" }}>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="md:col-span-2 rounded-md">
+          <Swiper
+            modules={[Navigation]}
+            navigation
+            loop
+            spaceBetween={10}
+            slidesPerView={1}
+          >
+            {movies.map((movie) => (
+              <SwiperSlide key={movie.id}>
+                <Box
+                  sx={{
+                    borderRadius: 2,
+                    overflow: "hidden",
+                  }}
+                >
+                  <motion.div
+                    className="relative w-full"
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                  >
+                    <Image
+                      src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                      alt={movie.title}
+                      layout="intrinsic"
+                      width={1280}
+                      height={720}
+                      className="h-full w-full object-cover"
+                      priority
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black to-transparent"></div>
                     <motion.div
-                      className="relative h-[400px] w-full"
+                      variants={textVariants}
                       initial="initial"
                       animate="animate"
                       exit="exit"
+                      className="absolute bottom-8 left-8 text-white space-y-4"
                     >
-                      <Image
-                        src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                        alt={movie.title}
-                        fill
-                        className="h-full w-full brightness-[90%] object-cover object-center rounded-lg"
-                        priority
-                      />
-                      <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black to-transparent"></div>
-                      <motion.div
+                      <motion.h2
                         variants={textVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                        className="absolute bottom-8 left-8 text-white space-y-4"
+                        className="text-xl md:text-2xl font-bold"
                       >
-                        <motion.h2
-                          variants={textVariants}
-                          className="text-xl md:text-2xl font-bold"
-                        >
-                          {movie.title}
-                        </motion.h2>
-                        <motion.p
-                          variants={textVariants}
-                          className="text-sm hidden md:block"
-                        >
-                          {movie.overview}
-                        </motion.p>
-                        <div className="flex space-x-4">
-                          <Button className="bg-red-800 rounded-md px-6 py-2">
-                            Watch
-                          </Button>
-                          <Button className="bg-secondary text-white px-6 py-2">
-                            Watch Trailer
-                          </Button>
-                        </div>
-                      </motion.div>
+                        {movie.title}
+                      </motion.h2>
+                      <motion.p
+                        variants={textVariants}
+                        className="text-sm hidden md:block"
+                      >
+                        {movie.overview}
+                      </motion.p>
+                      <div className="flex space-x-4">
+                        <Button className="bg-red-800 rounded-md px-6 py-2">
+                          Watch
+                        </Button>
+                        <Button className="bg-secondary text-white px-6 py-2">
+                          Watch Trailer
+                        </Button>
+                      </div>
                     </motion.div>
-                  </CarouselItem>
-                </AnimatePresence>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="absolute -left-4 top-1/2 transform -translate-y-1/2 text-black dark:text-white text-3xl z-10 hidden md:flex" />
-            <CarouselNext className="absolute -right-4 top-1/2 transform -translate-y-1/2 text-black dark:text-white text-3xl z-10 hidden md:flex" />
-          </Carousel>
+                  </motion.div>
+                </Box>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
         <div>
-          <div className="h-[400px] bg-gray-100 rounded-lg flex items-center justify-center">
+          <div className=" bg-gray-100 h-full rounded-lg flex items-center justify-center">
             <span className="text-gray-500">Component khác</span>
           </div>
         </div>
       </div>
-    </section>
+    </Box>
   );
 }
