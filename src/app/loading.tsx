@@ -1,7 +1,9 @@
-import { Loading } from "#shared/components";
-
+import React from "react";
+import { SkeletonCard } from "@/shared/components/skeleton-card";
 function LoadingPage() {
-    return <Loading full />;
+    return <div>
+        <SkeletonCard />
+    </div>
 }
 
 export default LoadingPage;

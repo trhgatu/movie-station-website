@@ -62,8 +62,6 @@ export function BannerSection() {
     }
     fetchData();
   }, []);
-
-  if (isLoading) return <div>Loading...</div>;
   if (error) return <div className="text-red-500 text-center">{error}</div>;
 
   return (
@@ -74,7 +72,7 @@ export function BannerSection() {
             <AnimatePresence key={movie.id}>
               <CarouselItem>
                 <motion.div
-                  className="relative h-[100vh] w-full"
+                  className="relative h-[80vh] w-full"
                   initial="initial"
                   animate="animate"
                   exit="exit"
@@ -83,9 +81,10 @@ export function BannerSection() {
                     src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                     alt={movie.title}
                     fill
-                    className="h-full w-full brightness-[60%] object-cover object-center"
+                    className="h-full w-full brightness-[90%] object-cover object-center"
                     priority
                   />
+                  <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black to-transparent"></div>
                   <motion.div
                     variants={textVariants}
                     initial="initial"
@@ -94,27 +93,26 @@ export function BannerSection() {
                     className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10 h-full items-center"
                   >
                     <motion.div
-                      variants={textVariants} className="flex flex-col justify-center space-y-6 p-6 px-10 rounded-lg"
+                      variants={textVariants} className="flex flex-col justify-center space-y-6 p-6 pt-10 px-10 rounded-lg"
                     >
                       <motion.div
                         variants={textVariants}
-                        className="text-3xl md:text-5xl font-bold"
+                        className="text-3xl md:text-5xl font-bold text-slate-200 font-work"
                       >
                         {movie.title}
                       </motion.div>
                       <motion.p
                         variants={textVariants}
-                        className="text-base md:text-lg hidden md:block"
+                        className="text-sm hidden md:block"
                       >
                         {movie.overview}
                       </motion.p>
                       <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-                        <motion.button
-                          whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
+                        <Button
                           className="bg-red-800 rounded-md px-6 py-2"
                         >
                           Watch
-                        </motion.button>
+                        </Button>
                         <Button className="bg-secondary text-white px-6 py-2">
                           Watch Trailer
                         </Button>

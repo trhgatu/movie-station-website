@@ -10,6 +10,11 @@ export default {
   ],
   theme: {
   	extend: {
+		fontFamily: {
+			work: [
+				'WORK SANS',
+			]
+		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
