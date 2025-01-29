@@ -95,7 +95,6 @@ export function BannerSection() {
                       className="h-full w-full object-cover"
                       priority
                     />
-                    <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black to-transparent"></div>
                     <motion.div
                       variants={textVariants}
                       initial="initial"
