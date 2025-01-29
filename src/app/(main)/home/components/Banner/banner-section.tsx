@@ -10,6 +10,7 @@ import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { motion } from "framer-motion";
+import { Play } from "lucide-react";
 
 interface Movie {
   id: number;
@@ -114,11 +115,13 @@ export function BannerSection() {
                       >
                         {movie.overview}
                       </motion.p>
-                      <div className="flex space-x-4">
-                        <Button className="bg-red-800 rounded-md px-6 py-2">
-                          Watch
+                      <div className="flex space-x-4 items-center">
+                        <Button
+                          className="bg-red-700 rounded-full w-12 h-12 hover:bg-red-600 hover:shadow-lg hover:shadow-red-500/50 transition-all duration-200">
+                          <Play className="text-white" size={20} />
                         </Button>
-                        <Button className="bg-secondary text-white px-6 py-2">
+                        <Button
+                          className="px-6 py-2 bg-white text-black hover:bg-gray-100 hover:shadow-lg hover:shadow-gray-400/50 transition-all duration-200">
                           Watch Trailer
                         </Button>
                       </div>

@@ -28,7 +28,7 @@ export const SwiperNavButtons = () => {
                 onClick={() => swiper.slideNext()}
                 className="dark:bg-white dark:text-black"
                 sx={{
-                    padding: "0.75rem",
+                    padding: "0.6rem",
                     backgroundColor: "black",
                     color: "white",
                     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
