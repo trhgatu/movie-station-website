@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { getUpcomingListMovie } from "@/shared/api-services/tmdbApi";
 import { Button } from "@/shared/components/ui/button";
+import { SwiperNavButtons } from "@/shared/components/swiper-nav/swiper-nav-button";
 import { Box } from "@mui/material";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -67,7 +68,6 @@ export function BannerSection() {
         <div className="md:col-span-2 rounded-md">
           <Swiper
             modules={[Navigation]}
-            navigation
             loop
             spaceBetween={10}
             slidesPerView={1}
@@ -128,6 +128,7 @@ export function BannerSection() {
                 </Box>
               </SwiperSlide>
             ))}
+            <SwiperNavButtons />
           </Swiper>
         </div>
         <div>

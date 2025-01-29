@@ -40,3 +40,7 @@ export async function getPopularListMovie(page: number = 1) {
 export async function getMovieDetail(id: string) {
     return await fetchTMDB(`movie/${id}`, { language: 'en-US' });
 }
+
+export async function getTopRatedMovies(page: number = 1) {
+    return await fetchTMDB('movie/top_rated', { language: 'en-US', page });
+}

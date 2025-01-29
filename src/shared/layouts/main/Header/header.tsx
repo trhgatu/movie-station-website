@@ -7,11 +7,11 @@ export function Header() {
 
     return (
         <header
-            className="header fixed top-0 z-50 w-full bg-white dark:bg-black border-solid border-b h-[var(--header-height)]"
+            className="header fixed top-0 z-50 w-full bg-white  dark:bg-black border-solid border-b h-[var(--header-height)]"
         >
             <div className="container mx-auto flex items-center justify-between py-4 px-6">
                 <div className="text-2xl font-bold">
-                    <Link href="/">MovieS</Link>
+                    <Link href="/" className="hover:text-red-600 transition-all duration-200">MovieS</Link>
                 </div>
                 <div>
                     <ModeToggle />
