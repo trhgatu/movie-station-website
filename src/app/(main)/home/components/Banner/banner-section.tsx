@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { getUpcomingListMovie } from "@/shared/api-services/tmdbApi";
 import { Button } from "@/shared/components/ui/button";
 import { SwiperNavButtons } from "@/shared/components/swiper-nav/swiper-nav-button";
@@ -13,6 +14,7 @@ import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 
 import { TVShowSection } from "../TV/tv-section";
+
 interface Movie {
   id: number;
   title: string;
@@ -22,23 +24,13 @@ interface Movie {
 }
 
 const textVariants = {
-  initial: {
-    x: 100,
-    opacity: 0,
-  },
+  initial: { x: 100, opacity: 0 },
   animate: {
     x: 0,
     opacity: 1,
-    transition: {
-      duration: 1,
-      staggerChildren: 0.1,
-    },
+    transition: { duration: 1, staggerChildren: 0.1 },
   },
-  exit: {
-    x: -100,
-    opacity: 0,
-    transition: { duration: 0.5 },
-  },
+  exit: { x: -100, opacity: 0, transition: { duration: 0.5 } },
 };
 
 export function BannerSection() {
@@ -67,6 +59,7 @@ export function BannerSection() {
   return (
     <Box sx={{ py: 4, px: 2, maxWidth: "1200px", mx: "auto" }}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Swiper for Upcoming Movies */}
         <div className="md:col-span-2 rounded-md">
           <Swiper
             modules={[Navigation]}
@@ -76,12 +69,7 @@ export function BannerSection() {
           >
             {movies.map((movie) => (
               <SwiperSlide key={movie.id}>
-                <Box
-                  sx={{
-                    borderRadius: 2,
-                    overflow: "hidden",
-                  }}
-                >
+                <Box sx={{ borderRadius: 2, overflow: "hidden" }}>
                   <motion.div
                     className="relative w-full"
                     initial="initial"
@@ -117,12 +105,14 @@ export function BannerSection() {
                         {movie.overview}
                       </motion.p>
                       <div className="flex space-x-4 items-center">
-                        <Button
-                          className="bg-red-700 rounded-full w-12 h-12 hover:bg-red-600 hover:shadow-lg hover:shadow-red-500/50 transition-all duration-200">
-                          <Play className="text-white" size={20} />
-                        </Button>
-                        <Button
-                          className="px-6 py-2 bg-white text-black hover:bg-gray-100 hover:shadow-lg hover:shadow-gray-400/50 transition-all duration-200">
+                        <Link href={`/movies/${movie.id}`} passHref>
+                          <Button
+                            className="bg-red-700 rounded-full w-12 h-12 hover:bg-red-600 hover:shadow-lg hover:shadow-red-500/50 transition-all duration-200"
+                          >
+                            <Play className="text-white" size={20} />
+                          </Button>
+                        </Link>
+                        <Button className="px-6 py-2 bg-white text-black hover:bg-gray-100 hover:shadow-lg hover:shadow-gray-400/50 transition-all duration-200">
                           Watch Trailer
                         </Button>
                       </div>
@@ -134,6 +124,8 @@ export function BannerSection() {
             <SwiperNavButtons />
           </Swiper>
         </div>
+
+        {/* TV Shows Section */}
         <div className="md:col-span-1">
           <TVShowSection />
         </div>
