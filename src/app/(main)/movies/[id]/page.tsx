@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { Box, Typography, CircularProgress, Chip, Stack } from "@mui/material";
+import { Box, Typography, CircularProgress, Chip, Stack, Button } from "@mui/material";
 import Image from "next/image";
 import { getMovieDetail } from "@/shared/api-services/tmdbApi";
+import Link from "next/link"; // Import Link từ next/link
 
 export default function MovieDetailPage() {
     const { id } = useParams();
@@ -100,7 +101,7 @@ export default function MovieDetailPage() {
                     <strong>Rating:</strong> {movie.vote_average} ({movie.vote_count} votes)
                 </Typography>
 
-                {/* Homepage link */}
+                {/* Official Homepage */}
                 {movie.homepage && (
                     <Typography variant="body1" mb={1}>
                         <a href={movie.homepage} target="_blank" rel="noopener noreferrer" style={{ color: "#1976d2" }}>
@@ -108,6 +109,13 @@ export default function MovieDetailPage() {
                         </a>
                     </Typography>
                 )}
+
+                {/* Watch Now Button */}
+                <Link href={`/watch/${id}`}>
+                    <Button variant="contained" color="primary" sx={{ mt: 3 }}>
+                        Watch Now
+                    </Button>
+                </Link>
             </Box>
         </Box>
     );

@@ -44,3 +44,7 @@ export async function getMovieDetail(id: string) {
 export async function getTopRatedMovies(page: number = 1) {
     return await fetchTMDB('movie/top_rated', { language: 'en-US', page });
 }
+
+export async function getTrendingTVShows(page: number = 1) {
+    return await fetchTMDB('trending/tv/day', { language: 'en-US', page });
+}
