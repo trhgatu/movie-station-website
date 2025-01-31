@@ -19,7 +19,6 @@ type Movie = {
 };
 
 export function UpcomingSection() {
-  const router = useRouter();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);

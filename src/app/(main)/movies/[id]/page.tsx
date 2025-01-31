@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { Box, Typography, CircularProgress, Chip, Stack, Button } from "@mui/material";
 import Image from "next/image";
 import { getMovieDetail } from "@/shared/api-services/tmdbApi";
-import Link from "next/link"; // Import Link từ next/link
+import Link from "next/link";
 
 export default function MovieDetailPage() {
     const { id } = useParams();
@@ -53,18 +53,15 @@ export default function MovieDetailPage() {
 
     return (
         <Box sx={{ p: 4, maxWidth: "900px", mx: "auto", display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 4 }}>
-            {/* Movie Poster */}
             <Box>
                 <Image
-                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                     alt={movie.title}
                     width={350}
                     height={500}
                     style={{ borderRadius: 8 }}
                 />
             </Box>
-
-            {/* Movie Details */}
             <Box>
                 <Typography variant="h4" fontWeight="bold" mb={2}>
                     {movie.title} <Typography component="span" variant="h6">({new Date(movie.release_date).getFullYear()})</Typography>
@@ -100,8 +97,6 @@ export default function MovieDetailPage() {
                 <Typography variant="body1" mb={3}>
                     <strong>Rating:</strong> {movie.vote_average} ({movie.vote_count} votes)
                 </Typography>
-
-                {/* Official Homepage */}
                 {movie.homepage && (
                     <Typography variant="body1" mb={1}>
                         <a href={movie.homepage} target="_blank" rel="noopener noreferrer" style={{ color: "#1976d2" }}>
@@ -109,8 +104,6 @@ export default function MovieDetailPage() {
                         </a>
                     </Typography>
                 )}
-
-                {/* Watch Now Button */}
                 <Link href={`/watch/${id}`}>
                     <Button variant="contained" color="primary" sx={{ mt: 3 }}>
                         Watch Now

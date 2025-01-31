@@ -12,6 +12,7 @@ import { Navigation } from "swiper/modules";
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 
+import { TVShowSection } from "../TV/tv-section";
 interface Movie {
   id: number;
   title: string;
@@ -133,10 +134,8 @@ export function BannerSection() {
             <SwiperNavButtons />
           </Swiper>
         </div>
-        <div>
-          <div className=" bg-gray-100 h-full rounded-lg flex items-center justify-center">
-            <span className="text-gray-500">Component khác</span>
-          </div>
+        <div className="md:col-span-1">
+          <TVShowSection />
         </div>
       </div>
     </Box>
