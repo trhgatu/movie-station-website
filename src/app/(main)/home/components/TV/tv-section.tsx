@@ -79,7 +79,7 @@ export function TVShowSection() {
                                         className="h-full w-full rounded-md object-cover"
                                     />
                                 </Box>
-                                <p className="text-white text-center mt-2">
+                                <p className="text-white text-center mt-2 line-clamp-1">
                                 {show.name}
                             </p>
                             </Box>
