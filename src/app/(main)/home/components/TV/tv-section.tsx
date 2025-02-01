@@ -5,6 +5,7 @@ import { Box, Card, CircularProgress, Typography } from "@mui/material";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Grid, Autoplay } from "swiper/modules";
+import Link from "next/link";
 
 import "swiper/css";
 import "swiper/css/grid";
@@ -66,25 +67,23 @@ export function TVShowSection() {
             >
                 {tvShows.map((show) => (
                     <SwiperSlide key={show.id}>
-                        <div className="p-0 h-full overflow-hidden">
-                            <Box display="flex" flexDirection="column" alignItems="center" className="h-full">
-                                <Box position="relative" width="100%" height="100%">
-                                    <Image
-                                        src={`https://image.tmdb.org/t/p/original/${show.poster_path}`}
-                                        alt={show.name}
-                                        layout="intrinsic"
-                                        width={1280}
-                                        height={720}
-                                        className="h-full w-full rounded-md object-cover"
-                                    />
+                        <Link href={`/tv/${show.id}`} passHref>
+                            <div className="p-0 h-full overflow-hidden cursor-pointer">
+                                <Box display="flex" flexDirection="column" alignItems="center" className="h-full">
+                                    <Box position="relative" width="100%" height="100%">
+                                        <Image
+                                            src={`https://image.tmdb.org/t/p/original/${show.poster_path}`}
+                                            alt={show.name}
+                                            layout="intrinsic"
+                                            width={1280}
+                                            height={720}
+                                            className="h-full w-full rounded-md object-cover"
+                                        />
+                                    </Box>
+                                    <p className="text-white text-center mt-2 line-clamp-1">{show.name}</p>
                                 </Box>
-                                <p className="text-white text-center mt-2 line-clamp-1">
-                                {show.name}
-                            </p>
-                            </Box>
-
-
-                        </div>
+                            </div>
+                        </Link>
                     </SwiperSlide>
                 ))}
             </Swiper>
