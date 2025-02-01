@@ -8,7 +8,6 @@ import { Grid, Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/grid";
-import { CardTitle } from "@/shared/components/ui/card";
 
 interface TVShow {
     id: number;
