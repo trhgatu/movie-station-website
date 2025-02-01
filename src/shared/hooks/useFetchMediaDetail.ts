@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useFetchMediaDetail(id: string, fetchDetail: Function) {
+export function useFetchMediaDetail(id: string, fetchDetail: (id: string) => Promise<any>) {
   const [media, setMedia] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
