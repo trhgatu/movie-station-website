@@ -49,7 +49,7 @@ const MediaDetail: React.FC<MediaDetailProps> = ({ media, type, isLoading, error
         <div className="h-full">
           <Image
             className="h-full rounded-md"
-            src={`https://image.tmdb.org/t/p/original/${media.poster_path}`}
+            src={`https://image.tmdb.org/t/p/original/${media.poster_path || media.backdrop_path}`}
             alt={media.title || media.name}
             width={200}
             height={225}
@@ -144,38 +144,41 @@ const MediaDetail: React.FC<MediaDetailProps> = ({ media, type, isLoading, error
         </Box>
 
       </div>
-      <Box mt={4}>
-        <Typography variant="h5" fontWeight="bold" mb={2}>
-          Seasons
-        </Typography>
-        <Grid container spacing={3}>
-          {media.seasons.map((season: any) => (
-            <Grid item xs={6} sm={4} md={2.4} key={season.id}>
-              <Card>
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500/${season.poster_path}`}
-                  alt={season.name}
-                  width={500}
-                  height={750}
-                  style={{ borderRadius: 8 }}
-                />
-                <CardContent>
-                  <Typography variant="h6" className="line-clamp-1" >{season.name}</Typography>
-                  <Typography variant="body2" color="textSecondary" className="line-clamp-2" >
-                    {season.overview || "No overview available."}
-                  </Typography>
-                  <Typography variant="body2" mt={2}>
-                    <strong>Number of Episodes:</strong> {season.episode_count}
-                  </Typography>
-                  <Typography variant="body2">
-                    <strong>Air Date:</strong> {new Date(season.air_date).toLocaleDateString()}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+      {isTVShow && (
+        <Box mt={4}>
+          <Typography variant="h5" fontWeight="bold" mb={2}>
+            Seasons
+          </Typography>
+          <Grid container spacing={3}>
+            {media.seasons.map((season: any) => (
+              <Grid item xs={6} sm={4} md={2.4} key={season.id}>
+                <Card>
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500/${season.poster_path}`}
+                    alt={season.name}
+                    width={500}
+                    height={750}
+                    style={{ borderRadius: 8 }}
+                  />
+                  <CardContent>
+                    <Typography variant="h6" className="line-clamp-1" >{season.name}</Typography>
+                    <Typography variant="body2" color="textSecondary" className="line-clamp-2" >
+                      {season.overview || "No overview available."}
+                    </Typography>
+                    <Typography variant="body2" mt={2}>
+                      <strong>Number of Episodes:</strong> {season.episode_count}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Air Date:</strong> {new Date(season.air_date).toLocaleDateString()}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      )}
+
     </Box>
   );
 };
