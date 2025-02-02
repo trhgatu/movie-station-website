@@ -17,6 +17,11 @@ const nextConfig = {
                 hostname: 'image.tmdb.org',
                 pathname: '/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'phim.nguonc.com',
+                pathname: '/**'
+            }
         ],
     },
 

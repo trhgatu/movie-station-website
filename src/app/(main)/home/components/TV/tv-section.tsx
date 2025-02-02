@@ -68,7 +68,7 @@ export function TVShowSection() {
                 {tvShows.map((show) => (
                     <SwiperSlide key={show.id}>
                         <Link href={`/tv/${show.id}`} passHref>
-                            <div className="p-0 h-full overflow-hidden cursor-pointer">
+                            <div className="p-0 h-full overflow-hidden hover:brightness-[60%] transition-all duration-200 cursor-pointer">
                                 <Box display="flex" flexDirection="column" alignItems="center" className="h-full">
                                     <Box position="relative" width="100%" height="100%">
                                         <Image

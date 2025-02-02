@@ -35,7 +35,7 @@ const MediaDetail: React.FC<MediaDetailProps> = ({ media, type, isLoading, error
 
   return (
     <Box sx={{ p: 4, pt: 0, maxWidth: "1200px", mx: "auto" }}>
-      <Box sx={{ position: "relative", width: "100%", height: "50vh" }}>
+      <Box sx={{ position: "relative", width: "100%", height: { xs: "30vh", md: "50vh" } }}>
         <Image
           src={`https://image.tmdb.org/t/p/original/${media.backdrop_path || media.poster_path}`}
           alt={media.title || media.name}
@@ -45,8 +45,15 @@ const MediaDetail: React.FC<MediaDetailProps> = ({ media, type, isLoading, error
         />
       </Box>
 
-      <div className="relative pl-9 flex">
-        <div className="h-full">
+      <Box
+        className="relative"
+        sx={{
+          display: { xs: "block", md: "flex" },
+          pl: { xs: 0, md: 9 },
+          mt: { xs: 2, md: -2 }
+        }}
+      >
+        <Box className="h-full" sx={{ width: { xs: "100%", md: "auto" }, textAlign: "center", mb: { xs: 2, md: 0 } }}>
           <Image
             className="h-full rounded-md"
             src={`https://image.tmdb.org/t/p/original/${media.poster_path || media.backdrop_path}`}
@@ -59,7 +66,7 @@ const MediaDetail: React.FC<MediaDetailProps> = ({ media, type, isLoading, error
               borderRadius: "20px"
             }}
           />
-          <div className="flex justify-between mt-4">
+          <Box className="flex justify-between mt-4" sx={{ flexDirection: { xs: "column", md: "row" }, gap: 2 }}>
             <Link href={`/watch/${type}/${media.id}`} passHref>
               <Button>
                 Watch Now
@@ -70,11 +77,10 @@ const MediaDetail: React.FC<MediaDetailProps> = ({ media, type, isLoading, error
                 Trailer
               </Button>
             </Link>
-          </div>
-        </div>
+          </Box>
+        </Box>
 
-
-        <Box sx={{ flex: 1 }} className="p-5">
+        <Box sx={{ flex: 1, p: { xs: 0, md: 5 } }}>
           <Typography variant="h4" fontWeight="bold" mb={2}>
             {media.title || media.name}{" "}
             <Typography component="span" variant="h6">
@@ -88,9 +94,9 @@ const MediaDetail: React.FC<MediaDetailProps> = ({ media, type, isLoading, error
             {media.overview}
           </Typography>
 
-          <Stack direction="row" spacing={1} mb={3}>
+          <Stack direction="row" spacing={1} mb={3} sx={{ flexWrap: "wrap" }}>
             {media.genres.map((genre: any) => (
-              <Chip key={genre.id} label={genre.name} variant="outlined" />
+              <Chip key={genre.id} label={genre.name} sx={{ mb: 1 }} />
             ))}
           </Stack>
           {isTVShow && (
@@ -133,17 +139,8 @@ const MediaDetail: React.FC<MediaDetailProps> = ({ media, type, isLoading, error
           <Typography variant="body1" mb={1}>
             <strong>Language:</strong> {media.spoken_languages?.map((lang: any) => lang.english_name).join(", ")}
           </Typography>
-
-          {media.homepage && (
-            <Typography variant="body1" mb={1}>
-              <a href={media.homepage} target="_blank" rel="noopener noreferrer" style={{ color: "#1976d2" }}>
-                Official Website
-              </a>
-            </Typography>
-          )}
         </Box>
-
-      </div>
+      </Box>
       {isTVShow && (
         <Box mt={4}>
           <Typography variant="h5" fontWeight="bold" mb={2}>
@@ -158,7 +155,6 @@ const MediaDetail: React.FC<MediaDetailProps> = ({ media, type, isLoading, error
                     alt={season.name}
                     width={500}
                     height={750}
-                    style={{ borderRadius: 8 }}
                   />
                   <CardContent>
                     <Typography variant="h6" className="line-clamp-1" >{season.name}</Typography>

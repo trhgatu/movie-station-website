@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
+import { SwiperNavButtons } from "@/shared/components/swiper-nav/swiper-nav-button";
 
 type Movie = {
     id: number;
@@ -54,7 +55,6 @@ export function MovieCarousel({ title, movies, isLoading, error, icon }: MovieCa
                     loop={true}
                     modules={[Navigation]}
                     spaceBetween={20}
-                    navigation={true}
                     slidesPerView={6}
                     breakpoints={{
                         320: { slidesPerView: 2, spaceBetween: 10 },
@@ -88,9 +88,9 @@ export function MovieCarousel({ title, movies, isLoading, error, icon }: MovieCa
                         </SwiperSlide>
 
                     ))}
+                    <SwiperNavButtons />
                 </Swiper>
-            )
-            }
+            )}
         </Box >
     );
 }
