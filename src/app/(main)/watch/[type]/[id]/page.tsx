@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import { useEffect, useState, useMemo } from "react";
-import { Box, CircularProgress, Typography, List, ListItem, ListItemButton } from "@mui/material";
+import { Box, CircularProgress, Typography, Grid, Button } from "@mui/material";
 import { getMovieDetail, getTVShowDetail } from "@/shared/api-services/tmdbApi";
 
 export default function WatchPage() {
@@ -76,8 +76,8 @@ export default function WatchPage() {
     if (!media) return null;
 
     return (
-        <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, height: "100vh", overflow: "hidden" }}>
-            <Box sx={{ flex: 2, p: { xs: 2, md: 4 }, maxWidth: { xs: "100%", md: "calc(100vw - 280px)" } }}>
+        <Box sx={{ display: "flex", flexDirection: "column"}}>
+            <Box sx={{ flex: 2, p: { xs: 2, md: 4 }, maxWidth: "100%" }}>
                 <Typography variant="h4" fontWeight="bold" mb={3}>
                     {media.title || media.name} ({new Date(media.release_date || media.first_air_date).getFullYear()})
                 </Typography>
@@ -92,76 +92,68 @@ export default function WatchPage() {
                 <Typography variant="body1" mt={3}>
                     {media.overview}
                 </Typography>
-            </Box>
-            {type === "tv" && media.seasons && (
-                <Box
-                    sx={{
-                        flex: 1,
-                        width: { xs: "100%", md: 280 },
-                        bgcolor: "background.paper",
-                        p: { xs: 2, md: 2 },
-                        borderLeft: { md: "1px solid #ddd" },
-                        height: "100vh",
-                        overflowY: "auto",
-                    }}
-                >
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700">Select Season:</label>
-                        <select
-                            className="w-full p-2 border rounded-md"
-                            value={selectedSeason ?? ""}
-                            onChange={(e) => setSelectedSeason(Number(e.target.value))}
-                        >
-                            {media.seasons.map((season: any) => (
-                                <option key={season.id} value={season.season_number}>
-                                    {season.name || `Season ${season.season_number}`}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    {selectedSeason !== null && (
-                        <div className="mb-4">
-                            {media.seasons.map(
-                                (season: any) =>
-                                    season.season_number === selectedSeason && (
-                                        <Image
-                                            width={200}
-                                            height={200}
-                                            style={{
-                                                objectFit: "cover"
-                                            }}
-                                            layout="intrinsic"
-                                            key={season.id}
-                                            src={`https://image.tmdb.org/t/p/w300${season.poster_path}`}
-                                            alt={`Season ${season.season_number}`}
-                                            className="rounded-lg shadow-md"
-                                        />
-                                    )
-                            )}
-                        </div>
-                    )}
-
-                    {selectedSeason !== null &&
-                        media.seasons
-                            .find((s: any) => s.season_number === selectedSeason)
-                            ?.episode_count > 0 && (
-                            <List sx={{ mt: 1 }}>
-                                {[...Array(media.seasons.find((s: any) => s.season_number === selectedSeason)?.episode_count)].map(
-                                    (_, index) => (
-                                        <ListItem key={index + 1} disablePadding>
-                                            <ListItemButton
-                                                selected={selectedEpisode === index + 1}
-                                                onClick={() => setSelectedEpisode(index + 1)}
-                                            >
-                                                Episode {index + 1}
-                                            </ListItemButton>
-                                        </ListItem>
-                                    )
+                {type === "tv" && media.seasons && (
+                    <Box mt={3}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} md={4}>
+                                <label className="block text-sm font-medium text-gray-700">Select Season:</label>
+                                <select
+                                    className="w-full p-2 border rounded-md"
+                                    value={selectedSeason ?? ""}
+                                    onChange={(e) => setSelectedSeason(Number(e.target.value))}
+                                >
+                                    {media.seasons.map((season: any) => (
+                                        <option key={season.id} value={season.season_number}>
+                                            {season.name || `Season ${season.season_number}`}
+                                        </option>
+                                    ))}
+                                </select>
+                                {selectedSeason !== null && (
+                                    <div className="mb-4 mt-3">
+                                        {media.seasons.map(
+                                            (season: any) =>
+                                                season.season_number === selectedSeason && (
+                                                    <Image
+                                                        width={200}
+                                                        height={200}
+                                                        style={{
+                                                            objectFit: "cover"
+                                                        }}
+                                                        layout="intrinsic"
+                                                        key={season.id}
+                                                        src={`https://image.tmdb.org/t/p/w300${season.poster_path}`}
+                                                        alt={`Season ${season.season_number}`}
+                                                        className="rounded-lg shadow-md"
+                                                    />
+                                                )
+                                        )}
+                                    </div>
                                 )}
-                            </List>
-                        )}
-                </Box>
-            )}
+                            </Grid>
+                            <Grid item xs={12} md={8}>
+                                {selectedSeason !== null &&
+                                    media.seasons
+                                        .find((s: any) => s.season_number === selectedSeason)
+                                        ?.episode_count > 0 && (
+                                        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                                            {[...Array(media.seasons.find((s: any) => s.season_number === selectedSeason)?.episode_count)].map(
+                                                (_, index) => (
+                                                    <Button
+                                                        key={index + 1}
+                                                        variant={selectedEpisode === index + 1 ? "contained" : "outlined"}
+                                                        onClick={() => setSelectedEpisode(index + 1)}
+                                                    >
+                                                        Episode {index + 1}
+                                                    </Button>
+                                                )
+                                            )}
+                                        </Box>
+                                    )}
+                            </Grid>
+                        </Grid>
+                    </Box>
+                )}
+            </Box>
         </Box>
     );
 }
