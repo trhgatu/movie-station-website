@@ -28,8 +28,6 @@ export default function WatchPage() {
                         return;
                     }
                     setMedia(data);
-
-                    // Chọn mặc định Season 1 - Episode 1
                     if (data?.seasons?.length > 0) {
                         setSelectedSeason(1);
                         setSelectedEpisode(1);

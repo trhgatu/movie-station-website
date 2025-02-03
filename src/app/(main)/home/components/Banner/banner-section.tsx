@@ -5,7 +5,7 @@ import Link from "next/link";
 import { getNowPlayingMovies } from "@/shared/api-services/tmdbApi";
 import { Button } from "@/shared/components/ui/button";
 import { SwiperNavButtons } from "@/shared/components/swiper-nav/swiper-nav-button";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -60,9 +60,11 @@ export function BannerSection() {
     <Box sx={{ py: 4, px: 2, maxWidth: "1200px", mx: "auto" }}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-2 rounded-md">
-          <div>
-            <span>Now Playing</span>
-          </div>
+          <Box display="flex" alignItems="center" mb={4}>
+            <Typography variant="h5" fontWeight="bold" mr={1}>
+              Now Playing Movies
+            </Typography>
+          </Box>
           <Swiper
             modules={[Navigation]}
             loop

@@ -51,46 +51,60 @@ export function TVShowSection() {
         );
 
     return (
-        <Box sx={{ py: 4, px: 2, maxWidth: "1200px", mx: "auto" }}>
-            <div>
-                <span>Trending TV Shows</span>
+        <Box>
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
+                <div className="md:col-span-1 rounded-md">
+                    <Box display="flex" alignItems="center" mb={4}>
+                        <Typography variant="h5" fontWeight="bold" mr={1}>
+                            Trending TV Show
+                        </Typography>
+                    </Box>
+                    <Swiper
+                        modules={[Grid, Autoplay]}
+                        grid={{ rows: 2 }}
+                        spaceBetween={20}
+                        slidesPerView={3}
+                        loop={true}
+                        autoplay={{ delay: 5000 }}
+                        breakpoints={{
+                            320: { slidesPerView: 1, grid: { rows: 1 } },
+                            768: { slidesPerView: 2 },
+                            1024: { slidesPerView: 3 },
+                        }}
+                        className="h-[480px]"
+                    >
+                        {tvShows.map((show) => (
+                            <SwiperSlide key={show.id}>
+                                <Link href={`/tv/${show.id}`} passHref>
+                                    <div className="p-0 h-full overflow-hidden hover:brightness-[60%] transition-all duration-200 cursor-pointer">
+                                        <Box
+                                            display="flex"
+                                            flexDirection="column"
+                                            alignItems="center"
+                                            className="h-full"
+                                            justifyContent="space-between"
+                                        >
+                                            <div className="relative w-full h-[186px] rounded-md overflow-hidden">
+                                                <Image
+                                                    src={`https://image.tmdb.org/t/p/original/${show.poster_path}`}
+                                                    alt={show.name}
+                                                    layout="fill"
+                                                    objectFit="cover"
+                                                    className="rounded-md"
+                                                />
+                                            </div>
+                                            <p className="text-center mt-3 px-2 text-sm font-medium line-clamp-1">
+                                                {show.name}
+                                            </p>
+
+                                        </Box>
+                                    </div>
+                                </Link>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </div>
             </div>
-            <Swiper
-                modules={[Grid, Autoplay]}
-                grid={{ rows: 2 }}
-                spaceBetween={20}
-                slidesPerView={3}
-                loop={true}
-                autoplay={{ delay: 5000 }}
-                breakpoints={{
-                    320: { slidesPerView: 1, grid: { rows: 1 } },
-                    768: { slidesPerView: 2 },
-                    1024: { slidesPerView: 3 },
-                }}
-                className="h-96"
-            >
-                {tvShows.map((show) => (
-                    <SwiperSlide key={show.id}>
-                        <Link href={`/tv/${show.id}`} passHref>
-                            <div className="p-0 h-full overflow-hidden hover:brightness-[60%] transition-all duration-200 cursor-pointer">
-                                <Box display="flex" flexDirection="column" alignItems="center" className="h-full">
-                                    <Box position="relative" width="100%" height="100%">
-                                        <Image
-                                            src={`https://image.tmdb.org/t/p/original/${show.poster_path}`}
-                                            alt={show.name}
-                                            layout="intrinsic"
-                                            width={1280}
-                                            height={720}
-                                            className="h-full w-full rounded-md object-cover"
-                                        />
-                                    </Box>
-                                    <p className="text-center mt-2 line-clamp-1">{show.name}</p>
-                                </Box>
-                            </div>
-                        </Link>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
         </Box>
     );
 }
