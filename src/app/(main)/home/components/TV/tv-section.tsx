@@ -1,7 +1,8 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { getTrendingTVShows } from "@/shared/api-services/tmdbApi";
-import { Box, Card, CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Grid, Autoplay } from "swiper/modules";
@@ -50,7 +51,10 @@ export function TVShowSection() {
         );
 
     return (
-        <Box className="bg-black p-4 relative w-full justify-center gap-4 overflow-hidden rounded-lg h-[435px] bg-background">
+        <Box sx={{ py: 4, px: 2, maxWidth: "1200px", mx: "auto" }}>
+            <div>
+                <span>Trending TV Shows</span>
+            </div>
             <Swiper
                 modules={[Grid, Autoplay]}
                 grid={{ rows: 2 }}
@@ -80,7 +84,7 @@ export function TVShowSection() {
                                             className="h-full w-full rounded-md object-cover"
                                         />
                                     </Box>
-                                    <p className="text-white text-center mt-2 line-clamp-1">{show.name}</p>
+                                    <p className="text-center mt-2 line-clamp-1">{show.name}</p>
                                 </Box>
                             </div>
                         </Link>

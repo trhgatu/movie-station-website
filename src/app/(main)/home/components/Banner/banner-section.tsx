@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { getUpcomingListMovie } from "@/shared/api-services/tmdbApi";
+import { getNowPlayingMovies } from "@/shared/api-services/tmdbApi";
 import { Button } from "@/shared/components/ui/button";
 import { SwiperNavButtons } from "@/shared/components/swiper-nav/swiper-nav-button";
 import { Box } from "@mui/material";
@@ -41,7 +41,7 @@ export function BannerSection() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await getUpcomingListMovie(1);
+        const data = await getNowPlayingMovies(1);
         setMovies(data.results);
       } catch (error) {
         console.error("Error fetching movies:", error);
@@ -59,8 +59,10 @@ export function BannerSection() {
   return (
     <Box sx={{ py: 4, px: 2, maxWidth: "1200px", mx: "auto" }}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Swiper for Upcoming Movies */}
         <div className="md:col-span-2 rounded-md">
+          <div>
+            <span>Now Playing</span>
+          </div>
           <Swiper
             modules={[Navigation]}
             loop
@@ -124,8 +126,6 @@ export function BannerSection() {
             <SwiperNavButtons />
           </Swiper>
         </div>
-
-        {/* TV Shows Section */}
         <div className="md:col-span-1">
           <TVShowSection />
         </div>
