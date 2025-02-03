@@ -76,7 +76,7 @@ export default function WatchPage() {
     if (!media) return null;
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "column"}}>
+        <Box sx={{ py: 4, px: 2, maxWidth: "1200px", mx: "auto" }}>
             <Box sx={{ flex: 2, p: { xs: 2, md: 4 }, maxWidth: "100%" }}>
                 <Typography variant="h4" fontWeight="bold" mb={3}>
                     {media.title || media.name} ({new Date(media.release_date || media.first_air_date).getFullYear()})

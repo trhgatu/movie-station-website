@@ -87,16 +87,13 @@ const MediaDetail: React.FC<MediaDetailProps> = ({ media, type, isLoading, error
               ({new Date(media.release_date || media.first_air_date).getFullYear()})
             </Typography>
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary" mb={2}>
-            Tagline: <i>{media.tagline || "No tagline available"}</i>
-          </Typography>
           <Typography variant="body1" mb={3}>
             {media.overview}
           </Typography>
 
           <Stack direction="row" spacing={1} mb={3} sx={{ flexWrap: "wrap" }}>
             {media.genres.map((genre: any) => (
-              <Chip key={genre.id} label={genre.name} sx={{ mb: 1 }} />
+              <span className="border-2 border-black dark:border-white rounded-full px-4" key={genre.id}>{genre.name}</span>
             ))}
           </Stack>
           {isTVShow && (
