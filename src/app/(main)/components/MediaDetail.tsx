@@ -1,4 +1,5 @@
-import { Box, Typography, CircularProgress, Chip, Stack, Grid, Card, CardContent } from "@mui/material";
+import { Box, Typography, CircularProgress, Stack, Grid } from "@mui/material";
+import { Card, CardContent } from "@/shared/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/shared/components/ui/button";
@@ -34,8 +35,8 @@ const MediaDetail: React.FC<MediaDetailProps> = ({ media, type, isLoading, error
   const isTVShow = media.first_air_date;
 
   return (
-    <Box sx={{ p: 4, pt: 0, maxWidth: "1200px", mx: "auto" }}>
-      <Box sx={{ position: "relative", width: "100%", height: { xs: "30vh", md: "50vh" } }}>
+    <Box sx={{ py: 4, px: 2, maxWidth: "1200px", mx: "auto" }}>
+      <Box sx={{ position: "relative", width: "100%", height: { xs: "30vh", md: "45vh" } }}>
         <Image
           src={`https://image.tmdb.org/t/p/original/${media.backdrop_path || media.poster_path}`}
           alt={media.title || media.name}
@@ -146,29 +147,39 @@ const MediaDetail: React.FC<MediaDetailProps> = ({ media, type, isLoading, error
           <Grid container spacing={3}>
             {media.seasons.map((season: any) => (
               <Grid item xs={6} sm={4} md={2.4} key={season.id}>
-                <Card>
-                  <Image
-                    src={`https://image.tmdb.org/t/p/w500/${season.poster_path}`}
-                    alt={season.name}
-                    width={500}
-                    height={750}
-                  />
-                  <CardContent>
-                    <Typography variant="h6" className="line-clamp-1" >{season.name}</Typography>
-                    <Typography variant="body2" color="textSecondary" className="line-clamp-2" >
-                      {season.overview || "No overview available."}
+                <Card className="h-full flex flex-col">
+                  <div className="relative h-72">
+                    <Image
+                      src={
+                        season.poster_path
+                          ? `https://image.tmdb.org/t/p/w500/${season.poster_path}`
+                          : "/placeholder.jpg"
+                      }
+                      alt={season.name}
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded-t-lg object-top"
+                    />
+                  </div>
+                  <CardContent className="flex-1 flex flex-col justify-between p-4">
+                    <Typography variant="h6" className="line-clamp-1 mb-2">
+                      {season.name}
                     </Typography>
-                    <Typography variant="body2" mt={2}>
-                      <strong>Number of Episodes:</strong> {season.episode_count}
-                    </Typography>
-                    <Typography variant="body2">
-                      <strong>Air Date:</strong> {new Date(season.air_date).toLocaleDateString()}
-                    </Typography>
+                    <div>
+                      <Typography variant="body2">
+                        <strong>Episodes:</strong> {season.episode_count}
+                      </Typography>
+                      <Typography variant="body2">
+                        <strong>Air Date:</strong> {new Date(season.air_date).toLocaleDateString()}
+                      </Typography>
+                    </div>
                   </CardContent>
                 </Card>
               </Grid>
             ))}
           </Grid>
+
+
         </Box>
       )}
 
