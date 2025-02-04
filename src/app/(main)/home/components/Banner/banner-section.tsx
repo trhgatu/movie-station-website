@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
+import { Play, SquarePlay } from "lucide-react";
 
 import { TVShowSection } from "../TV/tv-section";
 
@@ -64,6 +64,7 @@ export function BannerSection() {
             <Typography variant="h5" fontWeight="bold" mr={1}>
               Now Playing Movies
             </Typography>
+            <SquarePlay />
           </Box>
           <Swiper
             modules={[Navigation]}

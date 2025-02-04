@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Grid, Autoplay } from "swiper/modules";
 import Link from "next/link";
-
+import { Tv } from "lucide-react";
 import "swiper/css";
 import "swiper/css/grid";
 
@@ -51,13 +51,14 @@ export function TVShowSection() {
         );
 
     return (
-        <Box>
+        <Box className="hidden md:flex">
             <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
                 <div className="md:col-span-1 rounded-md">
                     <Box display="flex" alignItems="center" mb={4}>
                         <Typography variant="h5" fontWeight="bold" mr={1}>
                             Trending TV Show
                         </Typography>
+                        <Tv />
                     </Box>
                     <Swiper
                         modules={[Grid, Autoplay]}
