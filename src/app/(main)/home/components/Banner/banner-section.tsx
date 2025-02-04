@@ -89,6 +89,9 @@ export function BannerSection() {
                       height={720}
                       className="h-full w-full object-cover"
                       priority
+                      style={{
+                        filter: "brightness(0.5)"
+                      }}
                     />
                     <motion.div
                       variants={textVariants}
